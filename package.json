@@ -1,0 +1,26 @@
+{
+  "name": "nodejs-hexagonal-architecture",
+  "version": "1.0.0",
+  "description": "Simple implementation of hexagonal architecture in typescript nodejs",
+  "repository": {
+    "url": "https://github.com/tahadostifam/nodejs-hexagonal-architecture"
+  },
+  "author": "Taha Dostifam",
+  "license": "MIT",
+  "dependencies": {
+    "@prisma/client": "^5.19.1",
+    "@types/bcrypt": "^5.0.2",
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.5.4",
+    "bcrypt": "^5.1.1",
+    "express": "^4.20.0",
+    "node-dependency-injection": "^3.1.2",
+    "prisma": "^5.19.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.2"
+  },
+  "scripts": {
+    "start": "ts-node ./src/main.ts",
+    "orm:migrate:dev": "npx prisma migrate dev --schema ./src/Infrastructure/Database/schema.prisma"
+  }
+}
