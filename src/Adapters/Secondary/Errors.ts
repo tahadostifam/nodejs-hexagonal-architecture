@@ -1,7 +1,6 @@
-class NotFoundError extends Error {
+export class EmailAlreadyTakenError extends Error {
     constructor() {
         super();
-        this.name = "NotFound";
-        this.message = "not found";
+        this.message = "email already taken";
     }
 }

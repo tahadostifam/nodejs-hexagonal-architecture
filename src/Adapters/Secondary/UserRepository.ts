@@ -1,9 +1,12 @@
 import { PrismaClient } from "@prisma/client";
+import { UserRepository as AbstractUserRepository } from "../../Ports/User";
+import { User } from "../../Application/Domains/User";
+import { EmailAlreadyTakenError } from "./Errors";
 
-class UserRepository {
+class UserRepository implements AbstractUserRepository {
     constructor(private prisma: PrismaClient) {}
 
-    findByEmail(email: string) {
+    public findByEmail(email: string): Promise<User> {
         return new Promise((resolve, reject) => {
             this.prisma.user
                 .findFirst({
@@ -11,12 +14,14 @@ class UserRepository {
                         email,
                     },
                 })
-                .then(resolve)
+                .then((user) => {
+                    resolve(user!);
+                })
                 .catch(reject);
         });
     }
 
-    findById(id: number) {
+    public findById(id: number): Promise<User> {
         return new Promise((resolve, reject) => {
             this.prisma.user
                 .findFirst({
@@ -24,12 +29,14 @@ class UserRepository {
                         id,
                     },
                 })
-                .then(resolve)
+                .then((user) => {
+                    resolve(user!);
+                })
                 .catch(reject);
         });
     }
 
-    create(fullName: string, email: string, passwordHash: string) {
+    public create(fullName: string, email: string, passwordHash: string): Promise<User> {
         return new Promise(async (resolve, reject) => {
             this.prisma.user
                 .create({
@@ -40,7 +47,14 @@ class UserRepository {
                     },
                 })
                 .then(resolve)
-                .catch(reject);
+                .catch((e) => {
+                    if (e.code == "P2002") {
+                        reject(new EmailAlreadyTakenError());
+                        return;
+                    }
+
+                    reject(e);
+                });
         });
     }
 }

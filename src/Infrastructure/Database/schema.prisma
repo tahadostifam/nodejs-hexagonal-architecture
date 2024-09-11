@@ -6,7 +6,7 @@ datasource db {
 model User {
     id           Int      @id @default(autoincrement())
     fullName     String
-    email        String
+    email        String   @unique
     passwordHash String
     createdAt    DateTime @default(now())
 }

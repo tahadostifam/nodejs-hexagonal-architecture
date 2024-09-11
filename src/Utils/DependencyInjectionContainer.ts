@@ -1,3 +1,13 @@
-import { ContainerBuilder } from "node-dependency-injection";
+class Container {
+    private bindings = new Map<string, any>();
 
-export const container = new ContainerBuilder();
+    set(token: string, instance: any) {
+        this.bindings.set(token, instance);
+    }
+
+    get(token: string): any {
+        return this.bindings.get(token);
+    }
+}
+
+export const container = new Container();

@@ -4,7 +4,7 @@ import { container } from "../../Utils/DependencyInjectionContainer";
 class Database {
     private static instance: PrismaClient;
 
-    public static getInstance() {
+    public getInstance() {
         if (Database.instance) {
             return Database.instance;
         }

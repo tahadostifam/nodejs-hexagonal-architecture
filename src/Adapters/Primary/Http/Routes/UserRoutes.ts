@@ -5,7 +5,8 @@ function initUserRoutes() {
     const controller = new UserController();
     const router = express.Router();
 
-    router.post("/login", controller.login);
+    router.post("/login", (req, res, next) => controller.login(req, res, next));
+    router.post("/register", (req, res, next) => controller.register(req, res, next));
 
     return router;
 }

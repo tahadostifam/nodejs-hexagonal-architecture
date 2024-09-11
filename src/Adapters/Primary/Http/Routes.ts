@@ -1,8 +1,8 @@
 import express from "express";
 import initUserRoutes from "./Routes/UserRoutes";
 
-function initRoutes(app: express.Express) {
-    app.use(initUserRoutes());
+function initRoutes(app: express.Router) {
+    app.use("/users", initUserRoutes());
 }
 
 export default initRoutes;
